@@ -75,7 +75,7 @@ lua_opcode_names = [
 "VARARG",
 ]
 
-TPLINK_OPCODE_MAP = {
+SAMPLE_OPCODE_MAP = {
     "TESTSET": "MOVE",
     "SETUPVAL": "LOADK",
     "SETTABLE": "LOADBOOL",
@@ -339,7 +339,7 @@ class LuaCompiler:
             opcode = get_bits(data, 1, 6)
             if patch:
                 org_op_name = lua_opcode_names[opcode]
-                op_name = TPLINK_OPCODE_MAP[org_op_name]
+                op_name = SAMPLE_OPCODE_MAP[org_op_name]
                 opcode = OPCODE2INDEX[op_name]
                 index = self.index - self.int_size
                 self.bytecode_raw[index:self.index] = ((data & 0xFFFFFFC0) ^ opcode).to_bytes(self.int_size, byteorder='big' if self.big_endian else 'little')
